@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 const products = [
   {
@@ -10,7 +10,8 @@ const products = [
     price: "$29",
     description: "استراتيجيات خطوة بخطوة لمضاعفة المبيعات وأتمتة الحملات الإعلانية.",
     features: ["شرح خطط الأتمتة", "قوالب إعلانات جاهزة", "تحديثات مجانية لمدة سنة"],
-    badge: "الأكثر مبيعاً"
+    badge: "الأكثر مبيعاً",
+    buyUrl: "https://fadimohammed2.gumroad.com/l/mvcxzz"
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ const products = [
     price: "$49",
     description: "مجموعة قوالب احترافية قابلة للتعديل لإدارة الأهداف والميزانيات والجداول الزمنية.",
     features: ["أكثر من 15 قالب جاهز", "سهل التخصيص بالكامل", "مناسب للشركات الناشئة"],
-    badge: "جديد"
+    badge: "جديد",
+    buyUrl: "https://fadimohammed2.gumroad.com/l/mvcxzz"
   },
   {
     id: 3,
@@ -28,13 +30,12 @@ const products = [
     price: "$99",
     description: "تعلم كيف تبني أنظمة تعمل وتبيع 24/7 دون حاجة للتواجد الشخصي.",
     features: ["ساعتان من الشرح التطبيقي", "روابط الأدوات والأكواد", "دعم عبر مجتمع خاص"],
-    badge: "موصى به"
+    badge: "موصى به",
+    buyUrl: "https://fadimohammed2.gumroad.com/l/mvcxzz"
   }
 ];
 
 export default function Home() {
-  const [checkoutItem, setCheckoutItem] = useState<typeof products[0] | null>(null);
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans" dir="rtl">
       {/* Header */}
@@ -110,60 +111,19 @@ export default function Home() {
                   <span className="text-xs text-slate-400 block">السعر</span>
                   <span className="text-2xl font-black text-slate-900">{product.price}</span>
                 </div>
-                <button
-                  onClick={() => setCheckoutItem(product)}
-                  className="bg-slate-900 hover:bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
+                <a
+                  href={product.buyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-slate-900 hover:bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors text-center inline-block"
                 >
                   📥 شراء الآن
-                </button>
+                </a>
               </div>
             </div>
           ))}
         </div>
       </main>
-
-      {/* Checkout Modal */}
-      {checkoutItem && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100" dir="rtl">
-            <h3 className="text-xl font-bold mb-2 text-slate-900">إتمام طلب الشراء</h3>
-            <p className="text-sm text-slate-600 mb-4">أدخل بريدك الإلكتروني لاستلام ملفات المنتج فوراً بعد الدفع.</p>
-            
-            <div className="bg-slate-50 p-4 rounded-xl mb-4 border border-slate-200">
-              <div className="font-bold text-slate-800">{checkoutItem.title}</div>
-              <div className="text-indigo-600 font-extrabold text-lg mt-1">{checkoutItem.price}</div>
-            </div>
-
-            <form onSubmit={(e) => { e.preventDefault(); alert("تم إرسال طلب الشراء! سيتم الربط ببوابة الدفع الفعلية."); setCheckoutItem(null); }}>
-              <div className="mb-4">
-                <label className="block text-xs font-bold text-slate-700 mb-1">البريد الإلكتروني</label>
-                <input
-                  type="email"
-                  required
-                  placeholder="name@example.com"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-                />
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  type="submit"
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-sm transition"
-                >
-                  الانتقال للدفع
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCheckoutItem(null)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2.5 rounded-xl text-sm transition"
-                >
-                  إلغاء
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-sm">
