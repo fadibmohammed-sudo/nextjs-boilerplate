@@ -1,65 +1,176 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState } from 'react';
+import { ShoppingBag, Download, CheckCircle, ShieldCheck, Zap } from 'lucide-react';
+
+const products = [
+  {
+    id: 1,
+    title: "دليل التسويق الرقمي الشامل 2026",
+    category: "كتاب إلكتروني (PDF)",
+    price: "$29",
+    description: "استراتيجيات خطوة بخطوة لمضاعفة المبيعات وأتمتة الحملات الإعلانية.",
+    features: ["شرح خطط الأتمتة", "قوالب إعلانات جاهزة", "تحديثات مجانية لمدة سنة"],
+    badge: "الأكثر مبيعاً"
+  },
+  {
+    id: 2,
+    title: "حزمة قوالب خطط الأعمال وإدارة المشاريع",
+    category: "ملفات Notion & Excel",
+    price: "$49",
+    description: "مجموعة قوالب احترافية قابلة للتعديل لإدارة الأهداف والميزانيات والجداول الزمنية.",
+    features: ["أكثر من 15 قالب جاهز", "سهل التخصيص بالكامل", "مناسب للشركات الناشئة"],
+    badge: "جديد"
+  },
+  {
+    id: 3,
+    title: "دورة أتمتة الأعمال وبناء المنصات بدون كود",
+    category: "دورة فيديو + ملفات عمل",
+    price: "$99",
+    description: "تعلم كيف تبني أنظمة تعمل وتبيع 24/7 دون حاجة للتواجد الشخصي.",
+    features: ["ساعتان من الشرح التطبيقي", "روابط الأدوات والأكواد", "دعم عبر مجتمع خاص"],
+    badge: "موصى به"
+  }
+];
 
 export default function Home() {
+  const [checkoutItem, setCheckoutItem] = useState<typeof products[0] | null>(null);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 dir-rtl font-sans" dir="rtl">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2 font-black text-xl text-indigo-600">
+            <Zap className="w-6 h-6 text-indigo-600 fill-indigo-600" />
+            <span>متجر الرقميات</span>
+          </div>
+          <a
+            href="#products"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all shadow-md shadow-indigo-200"
+          >
+            تصفح المنتجات
+          </a>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-indigo-50/50 via-white to-slate-50 border-b border-slate-100 py-20 text-center px-4">
+        <div className="max-w-3xl mx-auto">
+          <span className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-bold mb-6">
+            <ShieldCheck className="w-4 h-4" /> التسليم آلي وفوري 100%
+          </span>
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
+            منصتك الذكية للحصول على أفضل <span className="text-indigo-600">المنتجات الرقمية</span>
+          </h1>
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            حمل الأدوات، الأدلة، والقوالب الجاهزة التي تساعدك على تسريع نمو أعمالك ومشاريعك فوراً وبأعلى جودة.
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500 font-medium">
+            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> تحميل مباشر بعد الشراء</span>
+            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> دفع آمن ومشفر</span>
+            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> دعم متواصل</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <main id="products" className="max-w-6xl mx-auto px-6 py-16 flex-grow">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-3">المنتجات المتاحة للتحميل الفوري</h2>
+          <p className="text-slate-600">اختر المنتج المناسب لك وابدأ الاستفادة منه الآن</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
+            >
+              {product.badge && (
+                <span className="absolute top-4 left-4 bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">
+                  {product.badge}
+                </span>
+              )}
+              <div className="p-6">
+                <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-2">{product.category}</span>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{product.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">{product.description}</p>
+                
+                <ul className="space-y-2 mb-6 border-t border-slate-100 pt-4">
+                  {product.features.map((feat, idx) => (
+                    <li key={idx} className="text-xs text-slate-500 flex items-center gap-2">
+                      <CheckCircle className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                <div>
+                  <span className="text-xs text-slate-400 block">السعر</span>
+                  <span className="text-2xl font-black text-slate-900">{product.price}</span>
+                </div>
+                <button
+                  onClick={() => setCheckoutItem(product)}
+                  className="bg-slate-900 hover:bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2"
+                >
+                  <Download className="w-4 h-4" /> شراء الآن
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </main>
+
+      {/* Checkout Modal */}
+      {checkoutItem && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dir-rtl" dir="rtl">
+            <h3 className="text-xl font-bold mb-2 text-slate-900">إتمام طلب الشراء</h3>
+            <p className="text-sm text-slate-600 mb-4">أدخل بريدك الإلكتروني لاستلام ملفات المنتج فوراً بعد الدفع.</p>
+            
+            <div className="bg-slate-50 p-4 rounded-xl mb-4 border border-slate-200">
+              <div className="font-bold text-slate-800">{checkoutItem.title}</div>
+              <div className="text-indigo-600 font-extrabold text-lg mt-1">{checkoutItem.price}</div>
+            </div>
+
+            <form onSubmit={(e) => { e.preventDefault(); alert("تم إرسال طلب الشراء! سيتم الربط ببوابة الدفع الفعلية."); setCheckoutItem(null); }}>
+              <div className="mb-4">
+                <label className="block text-xs font-bold text-slate-700 mb-1">البريد الإلكتروني</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="name@example.com"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="submit"
+                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-sm transition"
+                >
+                  الانتقال للدفع
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCheckoutItem(null)}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2.5 rounded-xl text-sm transition"
+                >
+                  إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-sm">
+        <p>© 2026 جميع الحقوق محفوظة - منصة المنتجات الرقمية.</p>
+      </footer>
     </div>
   );
 }
