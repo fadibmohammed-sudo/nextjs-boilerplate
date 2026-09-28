@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShoppingBag, Download, CheckCircle, ShieldCheck, Zap } from 'lucide-react';
 
 const products = [
   {
@@ -37,13 +36,12 @@ export default function Home() {
   const [checkoutItem, setCheckoutItem] = useState<typeof products[0] | null>(null);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 dir-rtl font-sans" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans" dir="rtl">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2 font-black text-xl text-indigo-600">
-            <Zap className="w-6 h-6 text-indigo-600 fill-indigo-600" />
-            <span>متجر الرقميات</span>
+            <span>⚡ متجر الرقميات</span>
           </div>
           <a
             href="#products"
@@ -57,8 +55,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-indigo-50/50 via-white to-slate-50 border-b border-slate-100 py-20 text-center px-4">
         <div className="max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-bold mb-6">
-            <ShieldCheck className="w-4 h-4" /> التسليم آلي وفوري 100%
+          <span className="inline-block bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-bold mb-6">
+            🛡️ التسليم آلي وفوري 100%
           </span>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
             منصتك الذكية للحصول على أفضل <span className="text-indigo-600">المنتجات الرقمية</span>
@@ -67,9 +65,9 @@ export default function Home() {
             حمل الأدوات، الأدلة، والقوالب الجاهزة التي تساعدك على تسريع نمو أعمالك ومشاريعك فوراً وبأعلى جودة.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500 font-medium">
-            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> تحميل مباشر بعد الشراء</span>
-            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> دفع آمن ومشفر</span>
-            <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-emerald-500" /> دعم متواصل</span>
+            <span>✅ تحميل مباشر بعد الشراء</span>
+            <span>✅ دفع آمن ومشفر</span>
+            <span>✅ دعم متواصل</span>
           </div>
         </div>
       </section>
@@ -85,7 +83,7 @@ export default function Home() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
+              className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
             >
               {product.badge && (
                 <span className="absolute top-4 left-4 bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">
@@ -100,7 +98,7 @@ export default function Home() {
                 <ul className="space-y-2 mb-6 border-t border-slate-100 pt-4">
                   {product.features.map((feat, idx) => (
                     <li key={idx} className="text-xs text-slate-500 flex items-center gap-2">
-                      <CheckCircle className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                      <span className="text-indigo-500 font-bold">✓</span>
                       {feat}
                     </li>
                   ))}
@@ -114,9 +112,9 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => setCheckoutItem(product)}
-                  className="bg-slate-900 hover:bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2"
+                  className="bg-slate-900 hover:bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
                 >
-                  <Download className="w-4 h-4" /> شراء الآن
+                  📥 شراء الآن
                 </button>
               </div>
             </div>
@@ -127,7 +125,7 @@ export default function Home() {
       {/* Checkout Modal */}
       {checkoutItem && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dir-rtl" dir="rtl">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100" dir="rtl">
             <h3 className="text-xl font-bold mb-2 text-slate-900">إتمام طلب الشراء</h3>
             <p className="text-sm text-slate-600 mb-4">أدخل بريدك الإلكتروني لاستلام ملفات المنتج فوراً بعد الدفع.</p>
             
